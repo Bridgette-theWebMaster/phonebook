@@ -22,13 +22,16 @@ export default function AddContact() {
         const onSubmitForm = async e => {
         e.preventDefault();
         try {
+            const headers = new Headers()
+
+            headers.append("Content-Type", "application/json")
+            headers.append("jwtToken", localStorage.token)
+
             const body = { user_id, name, email, phone, address, city, state, note }
             const response = await fetch(url,
                 {
                     method:"POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: headers,
                     body: JSON.stringify(body)
                 }
             )

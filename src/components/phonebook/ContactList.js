@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import stock from '../../assets/noun_Happy_50025.png'
-import DeleteButton from "../../buttons/DeleteButton";
 import EditButton from "../../buttons/EditButton";
 
 export default function ContactList(props) {
@@ -14,22 +13,52 @@ export default function ContactList(props) {
 
   const getContacts = async (e) => {
     try {
-      const res = await fetch(url);
+      const headers = new Headers()
+
+      headers.append("Content-Type", "application/json")
+      headers.append("jwtToken", localStorage.token)
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: headers,
+      })
       const contacts = await res.json();
+      if (contacts[0].id == null){
+        setContacts(0, "contacts")
+      } else {
       setContacts(contacts, "contacts");
-    } catch (err) {
+    }} catch (err) {
       console.log(err.message);
     }
   };
-  console.log(contacts);
+  //console.log(contacts);
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(url + `${id}`, {
+         method:"DELETE",
+         headers: {jwtToken: localStorage.token},
+      })
+      setContacts(contacts.filter(contacts => contacts.id !== id))
+   } catch (err) {
+      console.error(err.message)
+   }
+}
+  
+  
 //console.log(props, "props")
   return (
     <div>
       <Link to={`/contact/add`}>
         <button>Add contact</button>
       </Link>
+      <Link to={`/user`}>
+        <button>Account</button>
+      </Link>
       <ul className="Contacts">
-        {contacts.map((contact) => (
+        {contacts === 0
+          ? <strong>Contacts empty</strong>
+          : contacts.map((contact) => (
           <li key={contact.id}>
             <Link to={`/contact/${contact.id}`}>
               <img src={stock} alt={contact.name} width="70" />
@@ -37,8 +66,10 @@ export default function ContactList(props) {
               <strong>{contact.name}</strong>
             </Link>
             <br/>
-            <DeleteButton id={contact.id} />
-            <EditButton contact={contact} />
+            <button onClick={() => {handleDelete(contact.id)}}>
+              delete
+            </button>
+            <EditButton id={contact.id} />
           </li>
         ))}
       </ul>
