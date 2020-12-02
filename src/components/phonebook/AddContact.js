@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import {toast} from 'react-toastify'
+import BackButton from '../../buttons/BackButton'
 
 export default function AddContact() {
     const [inputs, setInputs] = useState({
+        user_id: 'e2edecdf-4445-4e14-91c6-3b9a290b722d',
         name: "",
         email: "",
         phone: "",
-        street: "",
-        zip: "",
+        address: "",
+        city: "",
+        state: "",
         note: ""
     })
-
-    const { name, email, phone, street, zip, note } = inputs
+    const { user_id, name, email, phone, address, city, state, note } = inputs
     const url = "http://localhost:8000/api/contacts"
 
     const onChange = e => 
@@ -20,7 +22,7 @@ export default function AddContact() {
         const onSubmitForm = async e => {
         e.preventDefault();
         try {
-            const body = { name, email, phone, street, zip, note }
+            const body = { user_id, name, email, phone, address, city, state, note }
             const response = await fetch(url,
                 {
                     method:"POST",
@@ -66,18 +68,25 @@ export default function AddContact() {
                     placeholder="Phone"
                 />
                 <input
-                    type="street"
-                    name="street"
-                    value={street}
+                    type="address"
+                    name="address"
+                    value={address}
                     onChange={e => onChange(e)}
                     placeholder="Street Address"
                 />
                 <input
-                    type="zip"
-                    name="zip"
-                    value={zip}
+                    type="city"
+                    name="city"
+                    value={city}
                     onChange={e => onChange(e)}
-                    placeholder="Zip Code"
+                    placeholder="City"
+                />
+                <input
+                    type="state"
+                    name="state"
+                    value={state}
+                    onChange={e => onChange(e)}
+                    placeholder="State"
                 />
                 <input
                     type="note"
@@ -87,8 +96,9 @@ export default function AddContact() {
                     placeholder="Notes"
                 />
                 <br />
-                <button className= 'button'>Add Contact</button>
+                <button type='submit' className= 'button'>Add Contact</button>
             </form>
+            <BackButton />
         </div>
     )
 }
