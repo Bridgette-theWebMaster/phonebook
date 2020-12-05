@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
+import { Link, Redirect, useHistory } from 'react-router-dom'
 import {toast} from 'react-toastify'
 import BackButton from '../../buttons/BackButton'
+import PhotoUploader from './ContactPhotoUploader'
 
-export default function AddContact() {
+export default function AddContact(props) {
+    console.log(props)
+    const history = useHistory()
     const [inputs, setInputs] = useState({
-        user_id: 'e2edecdf-4445-4e14-91c6-3b9a290b722d',
+        user_id: "",
         name: "",
         email: "",
         phone: "",
         address: "",
         city: "",
         state: "",
-        note: ""
+        note: "",
     })
     const { user_id, name, email, phone, address, city, state, note } = inputs
     const url = "http://localhost:8000/api/contacts"
@@ -37,9 +41,8 @@ export default function AddContact() {
             )
 
             const parseRes = await response.json()
-            console.log(parseRes)
-            
-            toast.success('Contact Added')
+            history.push(`/contact/${parseRes.id}`, {params: parseRes})
+            alert('Contact Added')
         } catch (err) {
             toast.error(err.message)
             console.log(err.message)
@@ -56,6 +59,7 @@ export default function AddContact() {
                     onChange={e => onChange(e)}
                     placeholder="Name"
                 />
+                <br />
                 <input
                     type="email"
                     name="email"
@@ -63,6 +67,7 @@ export default function AddContact() {
                     onChange={e => onChange(e)}
                     placeholder="Email"
                 />
+                <br />
                 <input
                     type="phone"
                     name="phone"
@@ -70,6 +75,7 @@ export default function AddContact() {
                     onChange={e => onChange(e)}
                     placeholder="Phone"
                 />
+                <br />
                 <input
                     type="address"
                     name="address"
@@ -77,6 +83,7 @@ export default function AddContact() {
                     onChange={e => onChange(e)}
                     placeholder="Street Address"
                 />
+                <br />
                 <input
                     type="city"
                     name="city"
@@ -84,6 +91,7 @@ export default function AddContact() {
                     onChange={e => onChange(e)}
                     placeholder="City"
                 />
+                <br />
                 <input
                     type="state"
                     name="state"
@@ -91,6 +99,7 @@ export default function AddContact() {
                     onChange={e => onChange(e)}
                     placeholder="State"
                 />
+                <br />
                 <input
                     type="note"
                     name="note"
@@ -100,7 +109,9 @@ export default function AddContact() {
                 />
                 <br />
                 <button type='submit' className= 'button'>Add Contact</button>
+                
             </form>
+                <br />
             <BackButton />
         </div>
     )

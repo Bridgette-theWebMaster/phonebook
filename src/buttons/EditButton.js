@@ -6,7 +6,7 @@ export default function EditButton(props) {
    return (
       <div>
          <Link to={`/contact/${id}/edit`}>
-              <button>edit contact</button>
+              <button>Edit Contact</button>
             </Link>
       </div>
    )

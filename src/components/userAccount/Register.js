@@ -22,8 +22,7 @@ const Register = ({ setAuth }) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     if(password !== matchPassword) {
-      toast.error('Passwords Do Not Match')
-      //throw new Error (`Passwords Do Not Match`)
+      alert('Passwords Do Not Match')
     } else {
       try {
         const body = { email, password, name, phone, address, city, state };

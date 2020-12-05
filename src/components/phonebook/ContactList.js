@@ -44,9 +44,7 @@ export default function ContactList(props) {
       console.error(err.message)
    }
 }
-  
-  
-//console.log(props, "props")
+
   return (
     <div>
       <Link to={`/contact/add`}>
@@ -61,13 +59,13 @@ export default function ContactList(props) {
           : contacts.map((contact) => (
           <li key={contact.id}>
             <Link to={`/contact/${contact.id}`}>
-              <img src={stock} alt={contact.name} width="70" />
+              <img src={contact.picture === null ? stock : contact.picture} alt={contact.name} width="70" />
               <br />
               <strong>{contact.name}</strong>
             </Link>
             <br/>
             <button onClick={() => {handleDelete(contact.id)}}>
-              delete
+              Delete Contact
             </button>
             <EditButton id={contact.id} />
           </li>

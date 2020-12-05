@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BackButton from '../../buttons/BackButton'
+import {Link} from 'react-router-dom'
 
 export default function EditUser(props) {
     console.log(props)
@@ -23,7 +24,6 @@ export default function EditUser(props) {
           headers: headers,
         })
         const users = await res.json();
-        console.log(users)
         setUser(users, "users");
       } catch (err) {
         console.log(err.message);
@@ -32,7 +32,7 @@ export default function EditUser(props) {
 
     const { name, email, phone, address, city, state, note } = user
     const onChange = e => 
-    setUser({ ...user, [e.target.name]: e.target.value})
+        setUser({ ...user, [e.target.name]: e.target.value})
 
     const onSubmitForm = async e => {
     e.preventDefault();
@@ -51,15 +51,16 @@ export default function EditUser(props) {
         )
 
         const parseRes = await response.json()
-        console.log(parseRes)
+        //console.log(parseRes)
+        alert('Account updated')
     } catch (err) {
         console.log(err.message)
     }
 }
-    
     return (
         <div>
             <h1>Update {user.name}'s Account</h1>
+            
             <form onSubmit={onSubmitForm} className="AddContact">
                 <input
                     type="name"
@@ -68,6 +69,7 @@ export default function EditUser(props) {
                     onChange={e => onChange(e)}
                     placeholder="Name"
                 />
+                <br />
                 <input
                     type="email"
                     name="email"
@@ -75,6 +77,7 @@ export default function EditUser(props) {
                     onChange={e => onChange(e)}
                     placeholder="Email"
                 />
+                <br />
                 <input
                     type="phone"
                     name="phone"
@@ -82,6 +85,7 @@ export default function EditUser(props) {
                     onChange={e => onChange(e)}
                     placeholder="Phone"
                 />
+                <br />
                 <input
                     type="address"
                     name="address"
@@ -89,6 +93,7 @@ export default function EditUser(props) {
                     onChange={e => onChange(e)}
                     placeholder="Street Address"
                 />
+                <br />
                 <input
                     type="city"
                     name="city"
@@ -96,6 +101,7 @@ export default function EditUser(props) {
                     onChange={e => onChange(e)}
                     placeholder="City"
                 />
+                <br />
                 <input
                     type="state"
                     name="state"
@@ -106,6 +112,7 @@ export default function EditUser(props) {
                 <br />
                 <button type='submit' className= 'button'>Update Account</button>
             </form>
+            
             <BackButton />
         </div>
     )

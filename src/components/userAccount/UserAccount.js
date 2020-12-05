@@ -26,28 +26,32 @@ export default function UserAccount(props) {
          headers: headers,
        })
        const users = await res.json();
-       console.log(users)
        setUser(users, "users");
      } catch (err) {
        console.log(err.message);
      }
    };
    
-   console.log(user, "user");
-   console.log(props, "props")
    return (
      <div>
-       <img src={stock} alt="user" width="150"/>
+       <img src={user.picture === 'null' ? stock : user.picture} alt={user.name} width ="80"/>
+       <br/>
+       <Link to={`/user/${user.id}/edit/photo_upload`}>
+        <button>Edit Photo</button>
+       </Link>
        <br />
        <h2>{user.name}</h2>
+       <p>User Id: {user.id}</p>
        {user.phone === null ? <p></p> : <p>phone: {user.phone}</p>}
        {user.email === null ? <p></p> : <p>email: {user.email}</p>}
        {(user.address !== null || user.city !== null || user.state !== null)
          ? <p>address: {user.address} {user.city}, {user.state}</p>
          : <p></p>}
        <Link to= {`user/${user.id}/edit`}>
-         <button>edit account</button>
+         <button>Edit Account</button>
        </Link>
+       <br/>
+       
        <BackButton />
      </div>
    );

@@ -50,7 +50,7 @@ export default function EditContact(props) {
         )
 
         const parseRes = await response.json()
-        console.log(parseRes)
+        //console.log(parseRes)
     } catch (err) {
         console.log(err.message)
     }
@@ -67,6 +67,7 @@ export default function EditContact(props) {
                     onChange={e => onChange(e)}
                     placeholder="Name"
                 />
+                <br />
                 <input
                     type="email"
                     name="email"
@@ -74,6 +75,7 @@ export default function EditContact(props) {
                     onChange={e => onChange(e)}
                     placeholder="Email"
                 />
+                <br />
                 <input
                     type="phone"
                     name="phone"
@@ -81,6 +83,7 @@ export default function EditContact(props) {
                     onChange={e => onChange(e)}
                     placeholder="Phone"
                 />
+                <br />
                 <input
                     type="address"
                     name="address"
@@ -88,6 +91,7 @@ export default function EditContact(props) {
                     onChange={e => onChange(e)}
                     placeholder="Street Address"
                 />
+                <br />
                 <input
                     type="city"
                     name="city"
@@ -95,6 +99,7 @@ export default function EditContact(props) {
                     onChange={e => onChange(e)}
                     placeholder="City"
                 />
+                <br />
                 <input
                     type="state"
                     name="state"
@@ -102,6 +107,7 @@ export default function EditContact(props) {
                     onChange={e => onChange(e)}
                     placeholder="State"
                 />
+                <br />
                 <input
                     type="note"
                     name="note"
@@ -112,6 +118,7 @@ export default function EditContact(props) {
                 <br />
                 <button type='submit' className= 'button'>Update Contact</button>
             </form>
+            <br />
             <BackButton />
         </div>
     )

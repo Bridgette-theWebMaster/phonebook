@@ -4,21 +4,25 @@ import AddContact from "./components/phonebook/AddContact";
 import Contact from "./components/phonebook/Contact";
 import ContactList from "./components/phonebook/ContactList";
 import EditContact from "./components/phonebook/EditContact";
+import ContactPhotoUploader from "./components/phonebook/ContactPhotoUploader";
 import Login from './components/userAccount/Login'
 import Register from './components/userAccount/Register'
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import UserAccount from './components/userAccount/UserAccount';
 import EditUser from './components/userAccount/EditUser';
+import SearchBar from './components/phonebook/SearchBar';
+import PhotoUploader from './components/userAccount/PhotoUploader';
 
 toast.configure()
 function App () {
   //auth
-  const [isAuthenticated, setIsAuthenticate] = useState(false);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  //component that controls ability to view private routes
   const setAuth = (boolean) => {
-    setIsAuthenticate(boolean);
+    setIsAuthenticated(boolean);
   };
+  // connecting to API to set jwtToken and setIsAuthenticated
   const checkAuth = async () => {
     const url = "http://localhost:8000/auth/verify";
 
@@ -30,7 +34,7 @@ function App () {
 
       const parseRes = await response.json();
       //console.log(parseRes)
-      parseRes === true ? setIsAuthenticate(true) : setIsAuthenticate(false);
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
     } catch (err) {
       console.error(err.message);
     }
@@ -39,32 +43,9 @@ function App () {
     checkAuth();
   }, []);
 
-  //getting contacts
-  /*const [contacts, setContacts] = useState([]);
-  const url = `http://localhost:8000/api/contacts/`;
 
-  useEffect(() => {
-    getContacts();
-  }, []);  
 
-  const getContacts = async (e) => {
-    try {
-      const headers = new Headers()
-
-      headers.append("Content-Type", "application/json")
-      headers.append("jwtToken", localStorage.token)
-
-      const res = await fetch(url, {
-        method: "GET",
-        headers: headers,
-      })
-      const contacts = await res.json();
-      setContacts(contacts, "contacts");
-    } catch (err) {
-      console.log(err.message);
-    }
-  };*/
-  //console.log(contacts);
+  // removes token from storage forces user out of private routes
   const logout = async e => {
     e.preventDefault();
     try {
@@ -76,10 +57,19 @@ function App () {
   };
 
   return (
+    
     <div className="App App-header">
+      <Link to={`/`}>
+        <header>
+          MOSHI MOSHI
+        </header>
+      </Link>
+      <br/>
       {!isAuthenticated ? <p></p> : <button onClick={e =>logout(e)}>
-        logout
+        Logout
       </button>}
+      {!isAuthenticated ? <p></p> : <SearchBar />}
+      <br/>
       <Switch>
       {["/", "/login"].map((path, i) => (
             <Route
@@ -126,6 +116,16 @@ function App () {
               )
             }
           />
+          <Route
+            exact
+            path="/user/:id/edit/photo_upload"
+            render={(props) =>
+              isAuthenticated ? (
+              <PhotoUploader {...props} setAuth={setAuth} /> 
+              ) : (
+                <Redirect to="/login" />
+              )}
+          />
 
           <Route
             exact
@@ -160,10 +160,22 @@ function App () {
             }
           />
         <Route
+          exact
             path="/contact/:id/edit"
             render={(props) =>
               isAuthenticated ? (
                 <EditContact {...props} setAuth={setAuth} />
+              ) : (
+                <Redirect to="/login" />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/contact/:id/edit/photo"
+            render={(props) =>
+              isAuthenticated ? (
+                <ContactPhotoUploader {...props} setAuth={setAuth} />
               ) : (
                 <Redirect to="/login" />
               )
