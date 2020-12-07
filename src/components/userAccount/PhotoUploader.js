@@ -15,7 +15,7 @@ export default class photoUploader extends Component {
 
 onFormSubmit(e){
     e.preventDefault();
-    const url = `http://localhost:8000/upload`
+    const url = `https://sleepy-bastion-45973.herokuapp.com/upload`
     const formData = new FormData();
     formData.append('image', this.state.file);
     const config = {
@@ -24,7 +24,7 @@ onFormSubmit(e){
     axios.put(url, formData, config)
     
         .then((response) => {
-          console.log(response)
+          //console.log(response)
           alert("The file is successfully uploaded");
         }).catch((error) => {
     });

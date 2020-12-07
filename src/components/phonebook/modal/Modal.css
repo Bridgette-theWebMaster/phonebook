@@ -1,0 +1,12 @@
+.modal {
+  position: fixed;
+  top: 12px;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid grey;
+  width: 75%;  
+  height: 50%;  
+  margin: 15%; 
+  box-sizing: border-box;  
+  transition: all 0.3s ease-out;  
+}

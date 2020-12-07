@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const Login = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
@@ -13,13 +12,14 @@ const Login = ({ setAuth }) => {
   const onChange = (e) =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
 
-  const url = `http://localhost:8000/auth`
+  const url = `https://sleepy-bastion-45973.herokuapp.com/auth`
+  
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = { email, password };
-      const response = await fetch(url + "/login", {
+      const response = await fetch( url + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,9 +33,10 @@ const Login = ({ setAuth }) => {
         localStorage.setItem("token", parseRes.jwtToken);
 
         setAuth(true);
-        toast.success("Login Successful", { autoClose: 1000 });
+        alert("Login Successful");
+      } else {
+        alert(parseRes)
       }
-      toast.error(parseRes, { autoClose: 1000 });
     } catch (err) {
       console.error(err.message);
     }

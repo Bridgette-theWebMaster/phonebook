@@ -14,7 +14,8 @@ import EditUser from './components/userAccount/EditUser';
 import SearchBar from './components/phonebook/SearchBar';
 import PhotoUploader from './components/userAccount/PhotoUploader';
 
-toast.configure()
+toast.configure();
+
 function App () {
   //auth
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,7 +25,8 @@ function App () {
   };
   // connecting to API to set jwtToken and setIsAuthenticated
   const checkAuth = async () => {
-    const url = "http://localhost:8000/auth/verify";
+    const proxyurl = `https://cors-anywhere.herokuapp.com/`
+    const url = "https://sleepy-bastion-45973.herokuapp.com/auth/verify";
 
     try {
       const response = await fetch(url, {
@@ -35,6 +37,7 @@ function App () {
       const parseRes = await response.json();
       //console.log(parseRes)
       parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+      
     } catch (err) {
       console.error(err.message);
     }
@@ -51,6 +54,7 @@ function App () {
     try {
       localStorage.removeItem("token");
       setAuth(false);
+      alert('logout successful')
     } catch (err) {
       console.error(err.message);
     }
@@ -188,7 +192,3 @@ function App () {
 }
 
 export default App;
-/*Moving all or most states within app is advantageous. if getContact
-is moved into app, getContact can be passed to ContactList where Contact
-is routed too. Then onClick specific contact, input that id into getContact
-Contact state would need to be passed so that db info has a client home. */

@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import stock from '../../assets/noun_Happy_50025.png'
 import {Link} from 'react-router-dom'
-import EditButton from "../../buttons/EditButton";
 import BackButton from "../../buttons/BackButton";
 
 export default function UserAccount(props) {
-   console.log(props)
-   const [user, setUser] = useState([]);
-   const url = `http://localhost:8000/api/user/`;
-   const id = user.id
    
+   const [user, setUser] = useState([]);
+   const url = `https://sleepy-bastion-45973.herokuapp.com/api/user/`;
+   const id = user.id
+   console.log(user)
    useEffect(() => {
      getUser();
    }, [])
@@ -34,7 +33,7 @@ export default function UserAccount(props) {
    
    return (
      <div>
-       <img src={user.picture === 'null' ? stock : user.picture} alt={user.name} width ="80"/>
+       <img src={user.picture === 'null' || user.picture === "" ? stock : user.picture} alt={user.name} width ="80"/>
        <br/>
        <Link to={`/user/${user.id}/edit/photo_upload`}>
         <button>Edit Photo</button>

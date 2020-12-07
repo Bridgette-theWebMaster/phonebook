@@ -15,7 +15,7 @@ export default function SearchBar() {
             headers.append("Content-Type", "application/json")
             headers.append("jwtToken", localStorage.token)
 
-      const url = `http://localhost:8000/api/user/search/` + query
+      const url = `https://sleepy-bastion-45973.herokuapp.com/api/user/search/` + query
       
       try {
          const res = await fetch(url,

@@ -5,7 +5,7 @@ import EditButton from "../../buttons/EditButton";
 
 export default function ContactList(props) {
   const [contacts, setContacts] = useState([]);
-  const url = `http://localhost:8000/api/contacts/`;
+  const url = `https://sleepy-bastion-45973.herokuapp.com/api/contacts/`;
 
   useEffect(() => {
     getContacts();

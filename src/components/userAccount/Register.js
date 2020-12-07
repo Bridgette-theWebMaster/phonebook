@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
@@ -15,7 +14,7 @@ const Register = ({ setAuth }) => {
   });
 
   const { email, password, matchPassword, name, phone, address, city, state } = inputs;
-  const url = `http://localhost:8000/auth`
+  const url = `https://sleepy-bastion-45973.herokuapp.com/auth`
   const onChange = (e) =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
 
@@ -39,10 +38,10 @@ const Register = ({ setAuth }) => {
           localStorage.setItem("token", parseRes.jwtToken);
 
           setAuth(true);
-          toast.success("Registration Successful", { autoClose: 1000 });
+          alert("Registration Successful");
         } else {
           setAuth(false);
-          toast.error(parseRes, { autoClose: 1000 });
+          alert(parseRes);
         }
       } catch (err) {
         console.error(err.message);

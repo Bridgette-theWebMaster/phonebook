@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import BackButton from '../../buttons/BackButton'
+import {useHistory} from 'react-router-dom'
 
 export default function EditContact(props) {
-    console.log(props)
     const id = props.match.params.id
     const [contact, setContact] = useState([]);
-    const url = `http://localhost:8000/api/contacts/`;
+    const url = `https://sleepy-bastion-45973.herokuapp.com/api/contacts/`;
     
     useEffect(() => {
       getContact();
@@ -50,11 +50,11 @@ export default function EditContact(props) {
         )
 
         const parseRes = await response.json()
-        //console.log(parseRes)
     } catch (err) {
         console.log(err.message)
     }
 }
+const history = useHistory()
     
     return (
         <div>
@@ -116,7 +116,9 @@ export default function EditContact(props) {
                     placeholder="Notes"
                 />
                 <br />
-                <button type='submit' className= 'button'>Update Contact</button>
+                <button type='submit' className= 'button' onClick={() => history.goBack()}>
+                        Update Contact
+                </button>
             </form>
             <br />
             <BackButton />

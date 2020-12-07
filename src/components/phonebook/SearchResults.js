@@ -9,7 +9,7 @@ export default function SearchResults(props) {
    const {user_id, name, email, phone, address, city, state, note, picture} = searchContact
    const addToContact = async e => {
       e.preventDefault();
-      const url = "http://localhost:8000/api/contacts"
+      const url = `https://sleepy-bastion-45973.herokuapp.com/api/contacts`
       try {
           const headers = new Headers()
 

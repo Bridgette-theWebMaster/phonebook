@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
-import {toast} from 'react-toastify'
+import { useHistory } from 'react-router-dom'
 import BackButton from '../../buttons/BackButton'
-import PhotoUploader from './ContactPhotoUploader'
 
 export default function AddContact(props) {
-    console.log(props)
+    //console.log(props)
     const history = useHistory()
     const [inputs, setInputs] = useState({
         user_id: "",
@@ -18,7 +16,7 @@ export default function AddContact(props) {
         note: "",
     })
     const { user_id, name, email, phone, address, city, state, note } = inputs
-    const url = "http://localhost:8000/api/contacts"
+    const url = "https://sleepy-bastion-45973.herokuapp.com/api/contacts"
 
     const onChange = e => 
         setInputs({ ...inputs, [e.target.name]: e.target.value})
@@ -44,8 +42,7 @@ export default function AddContact(props) {
             history.push(`/contact/${parseRes.id}`, {params: parseRes})
             alert('Contact Added')
         } catch (err) {
-            toast.error(err.message)
-            console.log(err.message)
+            alert(err.message)
         }
     }
     return ( 

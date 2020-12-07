@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import stock from '../../assets/noun_Happy_50025.png'
 import {Link} from 'react-router-dom'
 import EditButton from "../../buttons/EditButton";
 import BackButton from "../../buttons/BackButton";
+import Modal from "./modal/Modal";
+import EmailTemp from './EmailTemp'
+import ToggleContent from "./modal/ToggleContent";
 
 export default function Contact(props) {
   const id = props.match.params.id
   const [contact, setContact] = useState([]);
-  const url = `http://localhost:8000/api/contacts/`;
+  const url = `https://sleepy-bastion-45973.herokuapp.com/api/contacts/`;
   
   useEffect(() => {
     getContact();
@@ -30,9 +33,12 @@ export default function Contact(props) {
       console.log(err.message);
     }
   };
+
+  const modal = useRef(null)
   
   return (
     <div>
+      
       <img src={contact.picture === null ? stock : contact.picture} alt="contact" width="150"/>
       <br />
       <Link to={`/contact/${id}/edit/photo`}>
@@ -41,7 +47,16 @@ export default function Contact(props) {
       <br />
       <h2>{contact.name}</h2>
       {contact.phone === null || contact.phone === "" ? <p></p> : <p>phone: {contact.phone}</p>}
-      {contact.email === null || contact.email === ""  ? <p></p> : <p>email: {contact.email}</p>}
+      {contact.email === null || contact.email === ""  ? <p></p> : <><p>email: {contact.email}</p>
+      <ToggleContent
+      toggle={show => <button onClick={show}>Email</button>}
+      content={hide => (
+        <Modal>
+          <EmailTemp contact={contact} />
+          <button onClick={hide}>Cancel</button>
+        </Modal>
+      )}
+    /></>}
       {(contact.address === null || contact.city === null || contact.state === null ||
       contact.address === "" || contact.city === "" || contact.state === "")
         ? <p></p>
@@ -50,5 +65,6 @@ export default function Contact(props) {
       <EditButton id={contact.id} />
       
       <BackButton />
+      
     </div>);
 }

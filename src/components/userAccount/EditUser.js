@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import BackButton from '../../buttons/BackButton'
-import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 export default function EditUser(props) {
     console.log(props)
     const id = props.match.params.id
     const [user, setUser] = useState([]);
-    const url = `http://localhost:8000/api/user/`;
+    const url = `https://sleepy-bastion-45973.herokuapp.com/api/user/`;
     
     useEffect(() => {
       getUser();
@@ -35,28 +35,30 @@ export default function EditUser(props) {
         setUser({ ...user, [e.target.name]: e.target.value})
 
     const onSubmitForm = async e => {
-    e.preventDefault();
-    try {
-        const headers = new Headers()
-    
-        headers.append("Content-Type", "application/json")
-        headers.append("jwtToken", localStorage.token)
-        const body = { name, email, phone, address, city, state, note }
-        const response = await fetch(url + id,
-            {
-                method:"PATCH",
-                headers: headers,
-                body: JSON.stringify(body)
-            }
-        )
+        e.preventDefault();
+        try {
+            const headers = new Headers()
+        
+            headers.append("Content-Type", "application/json")
+            headers.append("jwtToken", localStorage.token)
+            const body = { name, email, phone, address, city, state, note }
+            const response = await fetch(url + id,
+                {
+                    method:"PATCH",
+                    headers: headers,
+                    body: JSON.stringify(body)
+                }
+            )
 
-        const parseRes = await response.json()
-        //console.log(parseRes)
-        alert('Account updated')
-    } catch (err) {
-        console.log(err.message)
+            const parseRes = await response.json()
+            //console.log(parseRes)
+            alert('Account updated')
+        } catch (err) {
+            alert(err.message)
+        }
     }
-}
+    const history = useHistory()
+
     return (
         <div>
             <h1>Update {user.name}'s Account</h1>
@@ -110,7 +112,7 @@ export default function EditUser(props) {
                     placeholder="State"
                 />
                 <br />
-                <button type='submit' className= 'button'>Update Account</button>
+                <button type='submit' className= 'button' onClick={() => history.goBack()}>Update Account</button>
             </form>
             
             <BackButton />

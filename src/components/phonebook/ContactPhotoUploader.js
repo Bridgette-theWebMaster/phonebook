@@ -16,7 +16,7 @@ export default class PhotoUploader extends Component {
 onFormSubmit(e){
     e.preventDefault();
     const id = this.props.match.params.id
-    const url = `http://localhost:8000/api/contacts/${id}/upload`
+    const url = `https://sleepy-bastion-45973.herokuapp.com/api/contacts/${id}/upload`
     const formData = new FormData();
     formData.append('image', this.state.file);
     const config = {
@@ -26,8 +26,9 @@ onFormSubmit(e){
     
         .then((response) => {
           console.log(response)
-          alert("The file is successfully uploaded");
+          alert("Photo upload successful");
         }).catch((error) => {
+            alert(error.message)
     });
 }
 onChange(e) {
