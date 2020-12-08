@@ -3,7 +3,7 @@ import BackButton from '../../buttons/BackButton'
 import {useHistory} from 'react-router-dom'
 
 export default function EditUser(props) {
-    console.log(props)
+    //console.log(props)
     const id = props.match.params.id
     const [user, setUser] = useState([]);
     const url = `https://sleepy-bastion-45973.herokuapp.com/api/user/`;
@@ -26,7 +26,7 @@ export default function EditUser(props) {
         const users = await res.json();
         setUser(users, "users");
       } catch (err) {
-        console.log(err.message);
+        alert(err.message);
       }
     };
 

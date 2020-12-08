@@ -31,7 +31,7 @@ export default function SearchResults(props) {
           history.push(`/contact/${parseRes.id}`, {params: parseRes})
             alert('Contact Added')
       } catch (err) {
-          console.log(err.message)
+          alert(err.message)
       }
    }
 

@@ -29,11 +29,6 @@ export default function EmailTemp(props) {
          templateParams,
          'user_XQcC5o7fSwDsV73hzzI1a'
       )
-         .then((res) => {
-            console.log(res.text)
-         }, (err) => {
-            console.log(err.text)
-         })
       resetForm()
    }
 
@@ -44,8 +39,8 @@ export default function EmailTemp(props) {
          email: ''
       })
    }
-   console.log(contact)
-   console.log(emailMessage.subject)
+   //console.log(contact)
+   //console.log(emailMessage.subject)
    return (
       <form onSubmit={handleSubmit}>
          <h1>Send an Email to {contact.name}</h1>

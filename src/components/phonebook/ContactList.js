@@ -28,7 +28,7 @@ export default function ContactList(props) {
       } else {
       setContacts(contacts, "contacts");
     }} catch (err) {
-      console.log(err.message);
+      alert(err.message);
     }
   };
   //console.log(contacts);

@@ -38,7 +38,7 @@ const Login = ({ setAuth }) => {
         alert(parseRes)
       }
     } catch (err) {
-      console.error(err.message);
+      alert(err.message);
     }
   };
   return (

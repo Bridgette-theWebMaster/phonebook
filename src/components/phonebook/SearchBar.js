@@ -27,7 +27,7 @@ export default function SearchBar() {
             setSearchContact(parseRes)
          
       } catch (err) {
-         console.log(err)
+         alert(err)
       }
    }
    return (

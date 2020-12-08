@@ -8,7 +8,7 @@ export default function UserAccount(props) {
    const [user, setUser] = useState([]);
    const url = `https://sleepy-bastion-45973.herokuapp.com/api/user/`;
    const id = user.id
-   console.log(user)
+   //console.log(user)
    useEffect(() => {
      getUser();
    }, [])
@@ -27,7 +27,7 @@ export default function UserAccount(props) {
        const users = await res.json();
        setUser(users, "users");
      } catch (err) {
-       console.log(err.message);
+       alert(err.message);
      }
    };
    

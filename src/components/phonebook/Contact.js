@@ -6,6 +6,7 @@ import BackButton from "../../buttons/BackButton";
 import Modal from "./modal/Modal";
 import EmailTemp from './EmailTemp'
 import ToggleContent from "./modal/ToggleContent";
+import ReminderForm from "./ReminderForm";
 
 export default function Contact(props) {
   const id = props.match.params.id
@@ -30,9 +31,11 @@ export default function Contact(props) {
       const contacts = await res.json();
       setContact(contacts, "contacts");
     } catch (err) {
-      console.log(err.message);
+      alert(err.message);
     }
   };
+
+  
 
   const modal = useRef(null)
   
@@ -65,6 +68,17 @@ export default function Contact(props) {
       <EditButton id={contact.id} />
       
       <BackButton />
+
+      <ToggleContent
+      toggle={show => <button onClick={show}>Add Reminder</button>}
+      content={hide => (
+        <Modal>
+          <ReminderForm
+            contact={contact} />
+          <button onClick={hide}>Cancel</button>
+        </Modal>
+      )}
+    />
       
     </div>);
 }

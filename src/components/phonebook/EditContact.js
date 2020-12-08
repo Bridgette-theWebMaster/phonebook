@@ -25,7 +25,7 @@ export default function EditContact(props) {
           const contacts = await res.json();
           setContact(contacts, "contacts");
         } catch (err) {
-          console.log(err.message);
+          alert(err.message);
         }
       };
 
@@ -51,7 +51,7 @@ export default function EditContact(props) {
 
         const parseRes = await response.json()
     } catch (err) {
-        console.log(err.message)
+        alert(err.message)
     }
 }
 const history = useHistory()
