@@ -1,6 +1,6 @@
 # Moshi Moshi
 
-![contactlist](https://github.com/Bridgette-theWebMaster/phonebook/blob/main/src/assets/README/contactlist.png)
+![contactlist](https://github.com/Bridgette-theWebMaster/phonebook/blob/main/src/assets/README/contactlist.png =250)
 
 Create a customizable and interactive phonebook effortlessly.
 
