@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BackButton from "../../buttons/BackButton";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditUser(props) {
   //console.log(props)
@@ -49,9 +50,9 @@ export default function EditUser(props) {
 
       const parseRes = await response.json();
       //console.log(parseRes)
-      alert("Account updated");
+      toast.dark("Account updated");
     } catch (err) {
-      alert(err.message);
+      console.log(err.message);
     }
   };
   const history = useHistory();

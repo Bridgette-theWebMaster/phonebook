@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import background from "../../assets/yagasuri.jpg";
 
 const Register = ({ setAuth }) => {
@@ -31,7 +32,7 @@ const Register = ({ setAuth }) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     if (password !== matchPassword) {
-      alert("Passwords Do Not Match");
+      toast.dark("Passwords Do Not Match");
     } else {
       try {
         const body = { email, password, name, phone, address, city, state };
@@ -48,13 +49,13 @@ const Register = ({ setAuth }) => {
           localStorage.setItem("token", parseRes.jwtToken);
 
           setAuth(true);
-          alert("Registration Successful");
+          toast.dark("Registration Successful");
         } else {
           setAuth(false);
-          alert(parseRes);
+          console.log(parseRes);
         }
       } catch (err) {
-        alert(err.message);
+        console.log(err.message);
       }
     }
   };

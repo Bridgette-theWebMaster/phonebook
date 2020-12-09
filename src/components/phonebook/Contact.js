@@ -32,7 +32,7 @@ export default function Contact(props) {
       const contacts = await res.json();
       setContact(contacts, "contacts");
     } catch (err) {
-      alert(err.message);
+      console.log(err.message);
     }
   };
 
@@ -56,12 +56,12 @@ export default function Contact(props) {
       <br />
       <h2>{contact.name}</h2>
       {contact.phone === null || contact.phone === "" ? null : (
-        <p>phone: {contact.phone}</p>
+        <p>Phone: {contact.phone}</p>
       )}
       {contact.email === null || contact.email === "" ? null : (
         <div className="email">
           <p>
-            email: {contact.email} {"     "}
+            Email: {contact.email} {"     "}
           </p>
           <ToggleContent
             toggle={(show) => (
@@ -85,11 +85,11 @@ export default function Contact(props) {
       contact.city === "" ||
       contact.state === "" ? null : (
         <p>
-          address: {contact.address} {contact.city}, {contact.state}
+          Sddress: {contact.address} {contact.city}, {contact.state}
         </p>
       )}
       {contact.note === null || contact.note === "" ? null : (
-        <p>note: {contact.note}</p>
+        <p>Note: {contact.note}</p>
       )}
       <EditButton id={contact.id} />
 

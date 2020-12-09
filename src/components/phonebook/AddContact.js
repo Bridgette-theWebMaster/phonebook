@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import BackButton from "../../buttons/BackButton";
 
 export default function AddContact(props) {
@@ -38,9 +39,9 @@ export default function AddContact(props) {
 
       const parseRes = await response.json();
       history.push(`/contact/${parseRes.id}`, { params: parseRes });
-      alert("Contact Added");
+      toast.dark("Contact Added");
     } catch (err) {
-      alert(err.message);
+      console.log(err.message);
     }
   };
   return (

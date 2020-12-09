@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import BackButton from "../../buttons/BackButton";
+import { toast } from "react-toastify";
 
 export default class PhotoUploader extends Component {
   constructor(props) {
@@ -26,10 +27,10 @@ export default class PhotoUploader extends Component {
 
       .then((response) => {
         console.log(response);
-        alert("Photo upload successful");
+        toast.dark("Photo upload successful");
       })
       .catch((error) => {
-        alert(error.message);
+        console.log(error.message);
       });
   }
   onChange(e) {

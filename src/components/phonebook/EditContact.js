@@ -25,7 +25,7 @@ export default function EditContact(props) {
       const contacts = await res.json();
       setContact(contacts, "contacts");
     } catch (err) {
-      alert(err.message);
+      console.log(err.message);
     }
   };
 

@@ -9,6 +9,7 @@ import Login from "./components/userAccount/Login";
 import Register from "./components/userAccount/Register";
 import { Route, Switch, Redirect, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 import UserAccount from "./components/userAccount/UserAccount";
 import EditUser from "./components/userAccount/EditUser";
 import SearchBar from "./components/phonebook/SearchBar";
@@ -53,7 +54,7 @@ function App() {
     try {
       localStorage.removeItem("token");
       setAuth(false);
-      toast.success("logout successful");
+      toast.dark("logout successful");
     } catch (err) {
       console.error(err.message);
     }

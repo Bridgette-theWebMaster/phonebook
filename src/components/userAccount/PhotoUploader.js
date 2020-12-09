@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import BackButton from "../../buttons/BackButton";
+import { toast } from "react-toastify";
 
 export default class photoUploader extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class photoUploader extends Component {
 
       .then((response) => {
         //console.log(response)
-        alert("The file is successfully uploaded");
+        toast.dark("Image was successfully uploaded");
       })
       .catch((error) => {});
   }

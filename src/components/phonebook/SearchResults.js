@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import stock from "../../assets/noun_Happy_50025.png";
 
 export default function SearchResults(props) {
@@ -47,9 +48,9 @@ export default function SearchResults(props) {
       const parseRes = await response.json();
       //console.log(parseRes)
       history.push(`/contact/${parseRes.id}`, { params: parseRes });
-      alert("Contact Added");
+      toast.dark("Contact Added");
     } catch (err) {
-      alert(err.message);
+      console.log(err.message);
     }
   };
 

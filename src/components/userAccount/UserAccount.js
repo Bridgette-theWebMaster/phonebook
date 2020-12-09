@@ -26,7 +26,7 @@ export default function UserAccount(props) {
       const users = await res.json();
       setUser(users, "users");
     } catch (err) {
-      alert(err.message);
+      console.log(err.message);
     }
   };
 
@@ -46,11 +46,11 @@ export default function UserAccount(props) {
       <br />
       <h2>{user.name}</h2>
       <p>User Id: {user.id}</p>
-      {user.phone === null ? <p></p> : <p>phone: {user.phone}</p>}
-      {user.email === null ? <p></p> : <p>email: {user.email}</p>}
+      {user.phone === null ? <p></p> : <p>Phone: {user.phone}</p>}
+      {user.email === null ? <p></p> : <p>Email: {user.email}</p>}
       {user.address !== null || user.city !== null || user.state !== null ? (
         <p>
-          address: {user.address} {user.city}, {user.state}
+          Address: {user.address} {user.city}, {user.state}
         </p>
       ) : (
         <p></p>
