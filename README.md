@@ -21,6 +21,7 @@ Send emails directly to your friends.
 Set reminders with your friends directly to your google calendar.
 
 ![search](https://github.com/Bridgette-theWebMaster/phonebook/blob/main/src/assets/README/search.png)
+
 Search for your friends with your id and add them directly to your phonebook.
 
 ## Built with
