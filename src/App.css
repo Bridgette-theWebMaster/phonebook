@@ -1,15 +1,204 @@
-.App {
+body {
   text-align: center;
 }
-
+/*header*/
+.helpbtn {
+  border: none;
+  float: left;
+}
+.help {
+  max-height: 1.5em;
+}
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: rgba(255, 251, 251, 0.568);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 3em;
+  padding-top: 5%;
+}
+header a {
+  font-weight: 750;
+  font-family: "Allura", cursive;
+  text-decoration: none;
+  color: gold;
+}
+header a:hover {
+  text-decoration: underline;
 }
 
+/*main app*/
+main {
+  font-family: "Open Sans", sans-serif;
+  color: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 251, 251, 0.568);
+  clear: right;
+  padding-bottom: 1.5em;
+}
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+button {
+  border-radius: 8px;
+  background: rgba(255, 251, 251, 0.226);
+  color: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(0, 0, 0, 0.5);
+}
+button:hover {
+  color: whitesmoke;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+}
+ul li {
+  list-style: none;
+}
+h1 {
+  color: rgb(235, 201, 8);
+  font-weight: 800;
+  font-size: 2em;
+}
+
+/*login page*/
+.Main-container {
+  display: flex;
+  flex-direction: row;
+}
+.Login-container,
+.Register-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 4;
+  text-align: center;
+  margin: 5%;
+}
+.Login-image,
+.Register-image {
+  flex-grow: 2;
+}
+.Login a {
+  color: rgba(0, 0, 0, 0.5);
+}
+.Login a:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: whitesmoke;
+}
+
+/*Contact list*/
+.Auth-App {
+  background-image: url("assets/seigaiha.png");
+  background-size: repeat;
+}
+.Contacts a {
+  color: gold;
+  text-decoration: none;
+  font-weight: 600;
+}
+.Contacts a:hover {
+  text-decoration: underline;
+  color: rgba(0, 0, 0, 0.5);
+}
+.Name {
+  font-size: 1.5em;
+}
+.Contacts img {
+  max-width: 80px;
+  background: whitesmoke;
+  border-radius: 40%;
+}
+
+/*Contact page*/
+.Contact h2,
+.User h2,
+.ContactForm h2,
+.photoUpload h2,
+.ReminderForm h2,
+.EmailForm h2 {
+  color: rgb(235, 201, 8);
+  font-weight: 550;
+  font-size: 2em;
+}
+.Contact .Photo,
+.User .Photo {
+  max-width: 200px;
+  background: whitesmoke;
+  border-radius: 40%;
+}
+.Contact {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+.email {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+}
+.email p {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.email-btn img {
+  max-width: 1.3em;
+}
+
+/*forms*/
+.ContactForm,
+.UserForm,
+.ContactForm {
+  padding-top: 1em;
+  padding-bottom: 3em;
+}
+.ContactForm input,
+.UserForm input,
+.Register input,
+.ReminderForm input,
+.EmailForm input {
+  padding-top: 0.8em;
+}
+.EmailForm .message {
+  height: 2em;
+}
+.Register-container {
+  margin-top: 0;
+}
+
+/*Search*/
+.search {
+  padding-bottom: 0.8em;
+}
+.Results {
+  font-size: 0.65em;
+  font-family: "Open Sans", sans-serif;
+  padding-bottom: 1em;
+}
+.ResultsUser {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  bottom: 0;
+}
+.Results img {
+  max-height: 2em;
+  border-radius: 20%;
+}
+
+/*footer*/
+footer {
+  font-size: 0.75em;
+  font-family: "Open Sans", sans-serif;
+  background: rgba(53, 53, 53, 0.952);
+  margin: 0;
+  padding: 1em;
+  color: rgba(255, 251, 251, 0.568);
+  width: 100%;
+}
+
+@media only screen and (min-width: 900px) {
+  .Contacts {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 4em;
+  }
+}

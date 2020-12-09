@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import stock from '../../assets/noun_Happy_50025.png'
+import stock from "../../assets/noun_Happy_50025.png";
 import EditButton from "../../buttons/EditButton";
 
 export default function ContactList(props) {
@@ -9,25 +9,26 @@ export default function ContactList(props) {
 
   useEffect(() => {
     getContacts();
-  }, []);  
+  }, []);
 
   const getContacts = async (e) => {
     try {
-      const headers = new Headers()
+      const headers = new Headers();
 
-      headers.append("Content-Type", "application/json")
-      headers.append("jwtToken", localStorage.token)
+      headers.append("Content-Type", "application/json");
+      headers.append("jwtToken", localStorage.token);
 
       const res = await fetch(url, {
         method: "GET",
         headers: headers,
-      })
+      });
       const contacts = await res.json();
-      if (contacts[0].id == null){
-        setContacts(0, "contacts")
+      if (contacts[0].id == null) {
+        setContacts(0, "contacts");
       } else {
-      setContacts(contacts, "contacts");
-    }} catch (err) {
+        setContacts(contacts, "contacts");
+      }
+    } catch (err) {
       alert(err.message);
     }
   };
@@ -36,17 +37,17 @@ export default function ContactList(props) {
   const handleDelete = async (id) => {
     try {
       await fetch(url + `${id}`, {
-         method:"DELETE",
-         headers: {jwtToken: localStorage.token},
-      })
-      setContacts(contacts.filter(contacts => contacts.id !== id))
-   } catch (err) {
-      console.error(err.message)
-   }
-}
+        method: "DELETE",
+        headers: { jwtToken: localStorage.token },
+      });
+      setContacts(contacts.filter((contacts) => contacts.id !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   return (
-    <div>
+    <div className="Contactlist">
       <Link to={`/contact/add`}>
         <button>Add contact</button>
       </Link>
@@ -54,22 +55,31 @@ export default function ContactList(props) {
         <button>Account</button>
       </Link>
       <ul className="Contacts">
-        {contacts === 0
-          ? <strong>Contacts empty</strong>
-          : contacts.map((contact) => (
-          <li key={contact.id}>
-            <Link to={`/contact/${contact.id}`}>
-              <img src={contact.picture === null ? stock : contact.picture} alt={contact.name} width="70" />
+        {contacts === 0 ? (
+          <strong>Contacts empty</strong>
+        ) : (
+          contacts.map((contact) => (
+            <li key={contact.id} className="ContactFlex">
+              <Link to={`/contact/${contact.id}`}>
+                <img
+                  src={contact.picture === null ? stock : contact.picture}
+                  alt={contact.name}
+                />
+                <br />
+                <strong className="Name">{contact.name}</strong>
+              </Link>
               <br />
-              <strong>{contact.name}</strong>
-            </Link>
-            <br/>
-            <button onClick={() => {handleDelete(contact.id)}}>
-              Delete Contact
-            </button>
-            <EditButton id={contact.id} />
-          </li>
-        ))}
+              <button
+                onClick={() => {
+                  handleDelete(contact.id);
+                }}
+              >
+                Delete Contact
+              </button>
+              <EditButton id={contact.id} />
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
